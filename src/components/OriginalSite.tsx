@@ -50,6 +50,12 @@ export function OriginalSite({ html }: { html: string }) {
     element.querySelectorAll('.elementor-counter-number').forEach((node) => observer.observe(node));
     cleanups.push(() => observer.disconnect());
     element.querySelectorAll(".elementor-invisible").forEach((node) => node.classList.remove("elementor-invisible"));
+    element.querySelectorAll<HTMLVideoElement>("video[autoplay]").forEach((video) => {
+      video.muted = video.hasAttribute("muted");
+      video.playsInline = true;
+      void video.play().catch(() => { /* Browsers may defer playback until the video is visible. */ });
+      cleanups.push(() => video.pause());
+    });
     element.querySelectorAll<HTMLElement>("[data-settings]").forEach((node) => {
       const config = settings(node);
       const slides = config.background_slideshow_gallery?.filter((image) => image.url.startsWith("/__l5e/"));
@@ -62,6 +68,10 @@ export function OriginalSite({ html }: { html: string }) {
         background.append(img);
       });
       node.prepend(background);
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        cleanups.push(() => background.remove());
+        return;
+      }
       let index = 0;
       const timer = window.setInterval(() => {
         background.children[index]?.classList.remove("active");
@@ -97,7 +107,17 @@ export function OriginalSite({ html }: { html: string }) {
       if (toggle) {
         const open = toggle.classList.toggle("elementor-active");
         toggle.setAttribute("aria-expanded", String(open));
-        toggle.closest(".elementor-widget")?.querySelector(".elementor-nav-menu--dropdown")?.classList.toggle("original-menu-open", open);
+        const widget = toggle.closest<HTMLElement>(".elementor-widget");
+        const dropdown = widget?.querySelector<HTMLElement>(".elementor-nav-menu--dropdown");
+        if (dropdown && widget) {
+          dropdown.classList.toggle("original-menu-open", open);
+          dropdown.setAttribute("aria-hidden", String(!open));
+          dropdown.querySelectorAll("a").forEach((a) => a.setAttribute("tabindex", open ? "0" : "-1"));
+          const bounds = widget.getBoundingClientRect();
+          dropdown.style.width = `${document.documentElement.clientWidth}px`;
+          dropdown.style.left = `${-bounds.left}px`;
+          dropdown.style.top = `${bounds.height}px`;
+        }
         return;
       }
       const link = target.closest<HTMLAnchorElement>("a");
