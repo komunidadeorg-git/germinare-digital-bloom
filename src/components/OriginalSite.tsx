@@ -13,7 +13,7 @@ type Settings = {
 };
 
 function settings(element: HTMLElement): Settings {
-  try { return JSON.parse(element.dataset.settings ?? "{}"); } catch { return {}; }
+  try { return JSON.parse(element.dataset['settings'] ?? "{}"); } catch { return {}; }
 }
 
 export function OriginalSite({ html }: { html: string }) {
@@ -77,10 +77,10 @@ export function OriginalSite({ html }: { html: string }) {
       }
       const link = target.closest<HTMLAnchorElement>("a");
       if (!link) return;
-      if (link.dataset.elementorOpenLightbox === "yes") {
+      if (link.dataset['elementorOpenLightbox'] === "yes") {
         event.preventDefault();
-        const group = link.dataset.elementorLightboxSlideshow;
-        const links = Array.from(element.querySelectorAll<HTMLAnchorElement>("a[data-elementor-open-lightbox='yes']")).filter((a) => !group || a.dataset.elementorLightboxSlideshow === group);
+        const group = link.dataset['elementorLightboxSlideshow'];
+        const links = Array.from(element.querySelectorAll<HTMLAnchorElement>("a[data-elementor-open-lightbox='yes']")).filter((a) => !group || a.dataset['elementorLightboxSlideshow'] === group);
         setGallery({ images: links.map((a) => a.href), index: Math.max(0, links.indexOf(link)) });
       } else if (link.getAttribute("href")?.startsWith("/") && !link.getAttribute("href")?.startsWith("/__l5e") && !event.ctrlKey && !event.metaKey) {
         event.preventDefault();
