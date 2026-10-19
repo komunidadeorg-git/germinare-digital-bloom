@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Site, PageHero } from "@/components/Site";
-import farm from "@/assets/farm.jpg";
+import quemSomosAsset from "@/assets/quem-somos.jpg.asset.json";
 
 export const Route = createFileRoute("/quem-somos")({
   head: () => ({

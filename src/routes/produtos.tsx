@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Site, PageHero, products } from "@/components/Site";
-import flower from "@/assets/flower.jpg";
+import produtosAsset from "@/assets/produtos.jpg.asset.json";
 
 export const Route = createFileRoute("/produtos")({
   head: () => ({
