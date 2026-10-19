@@ -24,6 +24,31 @@ export function OriginalSite({ html }: { html: string }) {
     const element = root.current;
     if (!element) return;
     const cleanups: (() => void)[] = [];
+    const page = element.querySelector<HTMLElement>('[data-elementor-id]');
+    const pageId = page?.dataset['elementorId'];
+    const bodyClasses = ['elementor-default', 'elementor-page', 'elementor-template-canvas', ...(pageId ? [`elementor-page-${pageId}`, `page-id-${pageId}`] : [])];
+    document.body.classList.add(...bodyClasses);
+    cleanups.push(() => document.body.classList.remove(...bodyClasses));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || !(entry.target instanceof HTMLElement)) return;
+        const node = entry.target;
+        observer.unobserve(node);
+        const target = Number(node.dataset['toValue'] ?? 0);
+        const duration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : Number(node.dataset['duration'] ?? 2000);
+        const start = performance.now();
+        let frame = 0;
+        const tick = (now: number) => {
+          const progress = duration ? Math.min(1, (now - start) / duration) : 1;
+          node.textContent = String(Math.round(target * progress));
+          if (progress < 1) frame = requestAnimationFrame(tick);
+        };
+        frame = requestAnimationFrame(tick);
+        cleanups.push(() => cancelAnimationFrame(frame));
+      });
+    });
+    element.querySelectorAll('.elementor-counter-number').forEach((node) => observer.observe(node));
+    cleanups.push(() => observer.disconnect());
     element.querySelectorAll(".elementor-invisible").forEach((node) => node.classList.remove("elementor-invisible"));
     element.querySelectorAll<HTMLElement>("[data-settings]").forEach((node) => {
       const config = settings(node);
@@ -85,7 +110,7 @@ export function OriginalSite({ html }: { html: string }) {
       } else if (link.getAttribute("href")?.startsWith("/") && !link.getAttribute("href")?.startsWith("/__l5e") && !event.ctrlKey && !event.metaKey) {
         event.preventDefault();
         navigate({ to: link.getAttribute("href") ?? "/" });
-      } else if (link.getAttribute("href") === "#") {
+      } else if (link.getAttribute("href") === "#" || /^https?:\/\/(www\.)?germinare\.uy\/[^#]*#topo$/.test(link.href)) {
         event.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" });
       }
     };
