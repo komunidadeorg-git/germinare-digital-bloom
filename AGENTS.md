@@ -12,3 +12,4 @@
 - Render the original sanitized page markup through OriginalSite with the preserved Elementor stylesheet; this keeps the owner's site faithful rather than redesigning it.
 - Keep original binary media in CDN asset pointers and page-specific metadata in leaf routes; this preserves source portability and distinct page previews.
 - Forms must not display a successful send without a delivery confirmation; the original WordPress submission service is not part of this application.
+- Preserve original MP4 videos with CDN-hosted WebM fallbacks on playback errors; this retains the owner's footage across browsers with different codec support.

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import videoFallbacks from "@/reference/video-fallbacks.json";
 
 type Settings = {
   background_slideshow_gallery?: { url: string }[];
@@ -53,8 +54,18 @@ export function OriginalSite({ html }: { html: string }) {
     element.querySelectorAll<HTMLVideoElement>("video[autoplay]").forEach((video) => {
       video.muted = video.hasAttribute("muted");
       video.playsInline = true;
+      const originalSrc = video.getAttribute("src") ?? "";
+      const fallback = Object.entries(videoFallbacks).find(([src]) => src === originalSrc)?.[1];
+      const recoverPlayback = () => {
+        if (!fallback || video.getAttribute("src") === fallback) return;
+        video.src = fallback;
+        video.load();
+        void video.play().catch(() => {});
+      };
+      video.addEventListener("error", recoverPlayback);
+      if (video.error) recoverPlayback();
       void video.play().catch(() => { /* Browsers may defer playback until the video is visible. */ });
-      cleanups.push(() => video.pause());
+      cleanups.push(() => { video.pause(); video.removeEventListener("error", recoverPlayback); });
     });
     element.querySelectorAll<HTMLElement>("[data-settings]").forEach((node) => {
       const config = settings(node);
