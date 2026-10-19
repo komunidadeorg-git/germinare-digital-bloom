@@ -1,0 +1,12 @@
+.original-site { background: var(--original-color-24); }
+.original-site h1, .original-site h2, .original-site h3 { font-family: inherit; }
+.original-slideshow { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.original-site .original-slideshow img { position: absolute; inset: 0; height: 100%; width: 100%; max-width: none; object-fit: cover; opacity: 0; transition: opacity 900ms; }
+.original-site .original-slideshow img.active { opacity: 1; }
+.original-site .elementor-nav-menu--dropdown.original-menu-open { display: block; transform: scaleY(1); max-height: none; }
+.original-site .elementor-field-type-step { display: none; }
+.original-site .elementor-menu-toggle { cursor: pointer; }
+.original-lightbox { position: fixed; inset: 0; z-index: 9999; background: var(--original-lightbox-background); display: flex; align-items: center; justify-content: space-between; padding: 24px; color: var(--original-color-24); }
+.original-lightbox img { max-width: 80%; max-height: 90vh; object-fit: contain; }
+.original-lightbox-close { position: absolute; right: 24px; top: 24px; }
+@media (prefers-reduced-motion: reduce) { .original-slideshow img { transition: none; } }
