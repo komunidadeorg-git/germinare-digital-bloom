@@ -4,7 +4,7 @@ import { Site, PageHero } from "@/components/Site";
 import hero from "@/assets/hero.jpg";
 
 export const Route = createFileRoute("/contato")({
-  validateSearch: (s: Record<string, unknown>) => ({ produto: typeof s.produto === "string" ? s.produto : undefined }),
+  validateSearch: (s: Record<string, unknown>): { produto?: string } => ({ produto: typeof s["produto"] === "string" ? (s["produto"] as string) : undefined }),
   head: () => ({
     meta: [
       { title: "Contato — Germinare" },
