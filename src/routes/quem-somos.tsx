@@ -13,7 +13,7 @@ export const Route = createFileRoute("/quem-somos")({
   }),
   component: () => (
     <Site>
-      <PageHero eyebrow="Quem somos" title="Cultivando o futuro da cannabis medicinal" img={farm} />
+      <PageHero eyebrow="Quem somos" title="Cultivando o futuro da cannabis medicinal" img={quemSomosAsset.url} />
       <section className="mx-auto max-w-3xl space-y-6 px-5 py-20 text-lg text-muted-foreground">
         <p>Acreditamos que pequenos e médios produtores podem impulsionar uma renovação econômica e ambiental. Por isso, integramos um coletivo crescente de produtores uruguaios.</p>
         <p>Nossa união promove cooperação e padronização das melhores práticas de cultivo, oferecendo produtos com potencial de referência mundial.</p>

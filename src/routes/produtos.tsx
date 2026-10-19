@@ -13,7 +13,7 @@ export const Route = createFileRoute("/produtos")({
   }),
   component: () => (
     <Site>
-      <PageHero eyebrow="Produtos" title="Flores medicinais certificadas" img={flower} />
+      <PageHero eyebrow="Produtos" title="Flores medicinais certificadas" img={produtosAsset.url} />
       <section className="mx-auto grid max-w-6xl gap-6 px-5 py-20 md:grid-cols-3">
         {products.map((p) => (
           <div key={p.name} className="flex flex-col rounded-2xl border border-border bg-card p-8">

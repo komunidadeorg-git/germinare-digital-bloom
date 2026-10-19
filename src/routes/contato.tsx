@@ -22,7 +22,7 @@ function Contato() {
   const field = "w-full rounded-xl border border-input bg-card px-4 py-3";
   return (
     <Site>
-      <PageHero eyebrow="Contato" title="Vamos conversar" img={hero} />
+      <PageHero eyebrow="Contato" title="Vamos conversar" img={contatoAsset.url} />
       <section className="mx-auto max-w-xl px-5 py-20">
         {sent ? (
           <p className="rounded-2xl bg-secondary p-8 text-center text-lg">Obrigado! Retornaremos em breve.</p>
