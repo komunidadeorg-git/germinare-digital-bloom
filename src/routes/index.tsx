@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Site, products } from "@/components/Site";
-import hero from "@/assets/hero.jpg";
-import flower from "@/assets/flower.jpg";
-import farm from "@/assets/farm.jpg";
+import heroAsset from "@/assets/hero.jpg.asset.json";
+import farmAsset from "@/assets/farm.jpg.asset.json";
+import flowerAsset from "@/assets/flower.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,7 +27,7 @@ function Index() {
   return (
     <Site>
       <section className="relative overflow-hidden bg-deep text-deep-foreground">
-        <img src={hero} alt="Estufa de cannabis ao pôr do sol" width={1600} height={1008} className="absolute inset-0 h-full w-full object-cover opacity-50" />
+        <img src={heroAsset.url} alt="Campo de cannabis medicinal" width={1920} height={1080} className="absolute inset-0 h-full w-full object-cover opacity-50" />
         <div className="relative mx-auto max-w-6xl px-5 py-32 md:py-44">
           <h1 className="max-w-3xl text-4xl leading-tight md:text-6xl">Soluções inovadoras na indústria da cannabis</h1>
           <p className="mt-6 max-w-xl text-lg opacity-90">Cultivamos flores medicinais e oferecemos consultoria, capacitação, genética e trading.</p>
@@ -48,7 +48,7 @@ function Index() {
       </section>
 
       <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 md:grid-cols-2">
-        <img src={farm} alt="Produtores no campo" loading="lazy" width={1024} height={1024} className="rounded-3xl" />
+        <img src={farmAsset.url} alt="Produtores no campo" loading="lazy" width={1200} height={1200} className="aspect-square w-full rounded-3xl object-cover" />
         <div>
           <p className="text-sm uppercase tracking-widest text-primary">Um pouco sobre nós</p>
           <h2 className="mt-3 text-3xl md:text-4xl">Cannabis medicinal para saúde e bem-estar</h2>
@@ -77,7 +77,7 @@ function Index() {
           <p className="mt-4 text-muted-foreground">Buscamos parceiros estratégicos para levar medicamentos de qualidade a mais pessoas, por um preço justo.</p>
           <Link to="/produtos" className="mt-6 inline-block rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground">Produtos</Link>
         </div>
-        <img src={flower} alt="Flor de cannabis" loading="lazy" width={1024} height={1024} className="rounded-3xl" />
+        <img src={flowerAsset.url} alt="Folha de cannabis medicinal" loading="lazy" width={1200} height={1200} className="aspect-square w-full rounded-3xl object-cover" />
       </section>
     </Site>
   );
