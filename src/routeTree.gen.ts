@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as Instituto2RouteImport } from './routes/instituto-2'
 import { Route as ProdutosRouteImport } from './routes/produtos'
 import { Route as QuemSomosRouteImport } from './routes/quem-somos'
+import { Route as QuemsomosRouteImport } from './routes/quemsomos'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Instituto2Route = Instituto2RouteImport.update({
+  id: '/instituto-2',
+  path: '/instituto-2',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProdutosRoute = ProdutosRouteImport.update({
@@ -34,39 +41,71 @@ const QuemSomosRoute = QuemSomosRouteImport.update({
   path: '/quem-somos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuemsomosRoute = QuemsomosRouteImport.update({
+  id: '/quemsomos',
+  path: '/quemsomos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
+  '/instituto-2': typeof Instituto2Route
   '/produtos': typeof ProdutosRoute
   '/quem-somos': typeof QuemSomosRoute
+  '/quemsomos': typeof QuemsomosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
+  '/instituto-2': typeof Instituto2Route
   '/produtos': typeof ProdutosRoute
   '/quem-somos': typeof QuemSomosRoute
+  '/quemsomos': typeof QuemsomosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
+  '/instituto-2': typeof Instituto2Route
   '/produtos': typeof ProdutosRoute
   '/quem-somos': typeof QuemSomosRoute
+  '/quemsomos': typeof QuemsomosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contato' | '/produtos' | '/quem-somos'
+  fullPaths:
+    | '/'
+    | '/contato'
+    | '/instituto-2'
+    | '/produtos'
+    | '/quem-somos'
+    | '/quemsomos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contato' | '/produtos' | '/quem-somos'
-  id: '__root__' | '/' | '/contato' | '/produtos' | '/quem-somos'
+  to:
+    | '/'
+    | '/contato'
+    | '/instituto-2'
+    | '/produtos'
+    | '/quem-somos'
+    | '/quemsomos'
+  id:
+    | '__root__'
+    | '/'
+    | '/contato'
+    | '/instituto-2'
+    | '/produtos'
+    | '/quem-somos'
+    | '/quemsomos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContatoRoute: typeof ContatoRoute
+  Instituto2Route: typeof Instituto2Route
   ProdutosRoute: typeof ProdutosRoute
   QuemSomosRoute: typeof QuemSomosRoute
+  QuemsomosRoute: typeof QuemsomosRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -85,6 +124,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/instituto-2': {
+      id: '/instituto-2'
+      path: '/instituto-2'
+      fullPath: '/instituto-2'
+      preLoaderRoute: typeof Instituto2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/produtos': {
       id: '/produtos'
       path: '/produtos'
@@ -99,14 +145,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuemSomosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quemsomos': {
+      id: '/quemsomos'
+      path: '/quemsomos'
+      fullPath: '/quemsomos'
+      preLoaderRoute: typeof QuemsomosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContatoRoute: ContatoRoute,
+  Instituto2Route: Instituto2Route,
   ProdutosRoute: ProdutosRoute,
   QuemSomosRoute: QuemSomosRoute,
+  QuemsomosRoute: QuemsomosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
