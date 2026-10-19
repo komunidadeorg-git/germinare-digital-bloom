@@ -10,3 +10,25 @@
 .original-lightbox img { max-width: 80%; max-height: 90vh; object-fit: contain; }
 .original-lightbox-close { position: absolute; right: 24px; top: 24px; }
 @media (prefers-reduced-motion: reduce) { .original-slideshow img { transition: none; } }
+/* Contact page (id 227): its original page stylesheet is missing upstream, so restore a readable layout. */
+.elementor-page-227 .elementor-element-c604a1d { min-height: 70vh; height: auto; position: relative; }
+.elementor-page-227 .elementor-element-c604a1d > .elementor-container { min-height: 70vh; height: auto; align-items: flex-end; padding-bottom: 64px; }
+.elementor-page-227 .elementor-element-c604a1d::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(24 59 61 / 0.1) 0%, rgb(24 59 61 / 0.85) 100%); pointer-events: none; }
+.elementor-page-227 .elementor-element-c604a1d > .elementor-container { position: relative; z-index: 1; }
+.elementor-page-227 .elementor-element-c604a1d :is(h1, h2, h3, p, .elementor-heading-title) { color: #fff !important; text-shadow: 0 2px 12px rgb(0 0 0 / 0.35); }
+.elementor-page-227 .elementor-element-c604a1d .elementor-heading-title { font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 600; }
+.elementor-page-227 .elementor-element-c604a1d p { font-size: 1.15rem; }
+.elementor-page-227 .elementor-element-289d68a1 { padding: 80px 0; }
+.elementor-page-227 .elementor-element-289d68a1 .elementor-heading-title { color: #183B3D; }
+.elementor-page-227 .elementor-form .elementor-field-group { margin-bottom: 14px; }
+.elementor-page-227 .elementor-form label { color: #183B3D; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; display: block; }
+.elementor-page-227 .elementor-form :is(input, select, textarea) { width: 100%; border: 1px solid #c9d6d4 !important; border-radius: 8px !important; background: #f7faf9 !important; padding: 12px 16px !important; color: #183B3D; }
+.elementor-page-227 .elementor-form :is(input, select, textarea):focus { outline: none; border-color: #5CA33F !important; box-shadow: 0 0 0 3px rgb(92 163 63 / 0.2); background: #fff !important; }
+.elementor-page-227 .elementor-form textarea { min-height: 140px; }
+.elementor-page-227 .elementor-form button[type="submit"] { width: 100%; background: #183B3D !important; color: #fff !important; border: 0; border-radius: 8px; padding: 14px 24px; font-weight: 600; cursor: pointer; transition: background 200ms; }
+.elementor-page-227 .elementor-form button[type="submit"] * { color: #fff !important; }
+.elementor-page-227 .elementor-form button[type="submit"]:hover { background: #5CA33F !important; }
+@media (max-width: 767px) {
+  .elementor-page-227 .elementor-element-c604a1d, .elementor-page-227 .elementor-element-c604a1d > .elementor-container { min-height: 60vh; }
+  .elementor-page-227 .elementor-element-289d68a1 { padding: 48px 0; }
+}
