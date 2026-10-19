@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Site, PageHero, products } from "@/components/Site";
 import flower from "@/assets/flower.jpg";
 
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/produtos")({
           <div key={p.name} className="flex flex-col rounded-2xl border border-border bg-card p-8">
             <h3 className="text-2xl text-primary">{p.name}</h3>
             <p className="mt-3 flex-1 text-muted-foreground">{p.desc}</p>
-            <Link to="/contato" search={{ produto: p.name }} className="mt-6 rounded-full bg-primary px-5 py-2.5 text-center font-semibold text-primary-foreground">Solicitar orçamento</Link>
+            <a href={`/contato?produto=${encodeURIComponent(p.name)}`} className="mt-6 rounded-full bg-primary px-5 py-2.5 text-center font-semibold text-primary-foreground">Solicitar orçamento</a>
           </div>
         ))}
       </section>

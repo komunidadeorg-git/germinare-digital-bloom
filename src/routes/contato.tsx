@@ -1,10 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Site, PageHero } from "@/components/Site";
 import hero from "@/assets/hero.jpg";
 
 export const Route = createFileRoute("/contato")({
-  validateSearch: (s: Record<string, unknown>): { produto?: string } => ({ produto: typeof s["produto"] === "string" ? (s["produto"] as string) : undefined }),
   head: () => ({
     meta: [
       { title: "Contato — Germinare" },
@@ -17,7 +16,8 @@ export const Route = createFileRoute("/contato")({
 });
 
 function Contato() {
-  const { produto } = Route.useSearch();
+  const [produto, setProduto] = useState<string | null>(null);
+  useEffect(() => setProduto(new URLSearchParams(window.location.search).get("produto")), []);
   const [sent, setSent] = useState(false);
   const field = "w-full rounded-xl border border-input bg-card px-4 py-3";
   return (
@@ -34,7 +34,7 @@ function Contato() {
               <option value="" disabled>Sou…</option>
               {["Produtor", "Profissional", "Investidor", "Consumidor"].map((o) => <option key={o}>{o}</option>)}
             </select>
-            <textarea required rows={5} placeholder="Mensagem" defaultValue={produto ? `Tenho interesse em: ${produto}` : ""} className={field} />
+            <textarea key={produto ?? "x"} required rows={5} placeholder="Mensagem" defaultValue={produto ? `Tenho interesse em: ${produto}` : ""} className={field} />
             <button className="w-full rounded-full bg-primary py-3 font-semibold text-primary-foreground">Enviar</button>
           </form>
         )}
